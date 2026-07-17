@@ -102,7 +102,7 @@ function parseMarkdown(readmeText) {
 }
 
 function renderHtml(model) {
-  const title = escapeHtml(model.pageTitle || 'Games');
+  const title = escapeHtml(model.pageTitle || 'Games - Blog by WYX');
   const tagline = model.tagline ? `<span class="subheading">${escapeHtml(model.tagline)}</span>` : '';
   const heroImageUrl = 'https://sayaka-4987.github.io/img/post-bg-desk.jpg';
   const blogHomeUrl = 'https://sayaka-4987.github.io/';
