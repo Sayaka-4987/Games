@@ -277,7 +277,7 @@ function renderHtml(model) {
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="${blogHomeUrl}">The sea is on fire</a>
+        <a class="navbar-brand" href="${blogHomeUrl}">Blog by WYX</a>
       </div>
 
       <div id="huxblog_navbar">
