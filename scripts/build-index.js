@@ -105,6 +105,10 @@ function renderHtml(model) {
   const title = escapeHtml(model.pageTitle || 'Games');
   const tagline = model.tagline ? `<span class="subheading">${escapeHtml(model.tagline)}</span>` : '';
   const heroImageUrl = 'https://sayaka-4987.github.io/img/post-bg-desk.jpg';
+  const blogHomeUrl = 'https://sayaka-4987.github.io/';
+  const aboutUrl = 'https://sayaka-4987.github.io/about/';
+  const tagsUrl = 'https://sayaka-4987.github.io/tags/';
+  const gamesHomeUrl = 'https://sayaka-4987.github.io/Games/';
 
   const sectionsHtml = model.sections
     .map((section) => {
@@ -113,17 +117,21 @@ function renderHtml(model) {
         .map((p) => `      <p class="games-note">${escapeHtml(p)}</p>`)
         .join('\n');
 
-      const listHtml = section.items
+      const listItemsHtml = section.items
         .map((item) => {
           if (item.isLink) {
-            return `      <div class="post-preview post-preview-home game-item">\n        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">\n          <h3 class="post-title">${escapeHtml(item.text)}</h3>\n          <h4 class="post-subtitle">Open repository on GitHub</h4>\n        </a>\n      </div>\n      <hr class="post-divider game-divider">`;
+            return `        <li><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.text)}</a></li>`;
           }
 
-          return `      <div class="post-preview post-preview-home game-item">\n        <h3 class="post-title">${escapeHtml(item.text)}</h3>\n      </div>\n      <hr class="post-divider game-divider">`;
+          return `        <li>${escapeHtml(item.text)}</li>`;
         })
         .join('\n');
 
-      return `    <section class="games-section">\n      <h2 class="games-section-title">${sectionTitle}</h2>\n${paragraphHtml ? `${paragraphHtml}\n` : ''}${listHtml}\n    </section>`;
+      const listHtml = section.items.length
+        ? `      <ul class="games-list">\n${listItemsHtml}\n      </ul>`
+        : '';
+
+      return `    <section class="games-section">\n      <h2 class="games-section-title">${sectionTitle}</h2>\n${paragraphHtml ? `${paragraphHtml}\n` : ''}${listHtml}\n      <hr class="post-divider game-divider">\n    </section>`;
     })
     .join('\n\n');
 
@@ -182,22 +190,43 @@ function renderHtml(model) {
       color: #808080;
     }
 
-    .game-item .post-title {
-      font-size: 23px;
-      margin-top: 14px;
-      margin-bottom: 6px;
+    .games-list {
+      margin: 0;
+      padding-left: 22px;
     }
 
-    .game-item .post-subtitle {
-      font-size: 14px;
-      margin: 0 0 6px;
-      font-weight: 300;
-      opacity: 0.85;
+    .games-list li {
+      margin: 0 0 10px;
+      color: #404040;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    .games-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .games-list a {
+      color: #5b4abf;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(91, 74, 191, 0.35);
+    }
+
+    .games-list a:visited {
+      color: #6f4a9e;
+      border-bottom-color: rgba(111, 74, 158, 0.35);
+    }
+
+    .games-list a:hover,
+    .games-list a:focus {
+      color: #663399;
+      border-bottom-color: #663399;
+      text-decoration: none;
     }
 
     .game-divider {
-      margin-top: 10px;
-      margin-bottom: 10px;
+      margin-top: 18px;
+      margin-bottom: 18px;
     }
 
     .games-footer {
@@ -229,13 +258,38 @@ function renderHtml(model) {
         font-size: 24px;
       }
 
-      .game-item .post-title {
-        font-size: 20px;
+      .games-list li {
+        font-size: 17px;
       }
     }
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" aria-label="Toggle navigation menu" aria-controls="huxblog_navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="${blogHomeUrl}">The sea is on fire</a>
+      </div>
+
+      <div id="huxblog_navbar">
+        <div class="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="${blogHomeUrl}">Home</a></li>
+            <li><a href="${aboutUrl}">About</a></li>
+            <li><a href="${tagsUrl}">Tags</a></li>
+            <li><a href="${gamesHomeUrl}">Games</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <header class="intro-header has-bg-image" style="background-image: url('${heroImageUrl}')">
     <div class="container">
       <div class="row">
@@ -260,6 +314,63 @@ ${sectionsHtml}
       </div>
     </div>
   </main>
+
+  <script>
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    if ($toggle && $navbar && $collapse) {
+      var __HuxNav__ = {
+        close: function() {
+          $navbar.className = ' ';
+          $toggle.setAttribute('aria-expanded', 'false');
+          setTimeout(function() {
+            if ($navbar.className.indexOf('in') < 0) {
+              $collapse.style.height = '0px';
+            }
+          }, 400);
+        },
+        open: function() {
+          $collapse.style.height = 'auto';
+          $navbar.className += ' in';
+          $toggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      $toggle.addEventListener('click', function() {
+        if ($navbar.className.indexOf('in') > 0) {
+          __HuxNav__.close();
+        } else {
+          __HuxNav__.open();
+        }
+      });
+
+      $toggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close();
+          } else {
+            __HuxNav__.open();
+          }
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (e.target === $toggle) return;
+        if (e.target.className === 'icon-bar') return;
+        __HuxNav__.close();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && $navbar.className.indexOf('in') > 0) {
+          __HuxNav__.close();
+          $toggle.focus();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
 `;
