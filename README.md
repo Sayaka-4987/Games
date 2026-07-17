@@ -1,6 +1,6 @@
 # Games
 
-A collection of small web games, experiments, and interactive projects.
+Games, prototypes, and the occasional questionable decision.
 
 ## One Page Webgame
 
