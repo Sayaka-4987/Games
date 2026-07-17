@@ -110,21 +110,20 @@ function renderHtml(model) {
     .map((section) => {
       const sectionTitle = escapeHtml(section.title || 'Section');
       const paragraphHtml = section.paragraphs
-        .map((p) => `<p>${escapeHtml(p)}</p>`)
-        .join('\n        ');
+        .map((p) => `      <p class="games-note">${escapeHtml(p)}</p>`)
+        .join('\n');
 
-      const listHtml = section.items.length
-        ? `<ul class="game-list">\n${section.items
-            .map((item) => {
-              if (item.isLink) {
-                return `          <li><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.text)}</a></li>`;
-              }
-              return `          <li>${escapeHtml(item.text)}</li>`;
-            })
-            .join('\n')}\n        </ul>`
-        : '';
+      const listHtml = section.items
+        .map((item) => {
+          if (item.isLink) {
+            return `      <div class="post-preview post-preview-home game-item">\n        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">\n          <h3 class="post-title">${escapeHtml(item.text)}</h3>\n          <h4 class="post-subtitle">Open repository on GitHub</h4>\n        </a>\n      </div>\n      <hr class="post-divider game-divider">`;
+          }
 
-      return `      <section class="catalog-card">\n        <h2 class="section-title">${sectionTitle}</h2>\n        ${paragraphHtml}\n        ${listHtml}\n      </section>`;
+          return `      <div class="post-preview post-preview-home game-item">\n        <h3 class="post-title">${escapeHtml(item.text)}</h3>\n      </div>\n      <hr class="post-divider game-divider">`;
+        })
+        .join('\n');
+
+      return `    <section class="games-section">\n      <h2 class="games-section-title">${sectionTitle}</h2>\n${paragraphHtml ? `${paragraphHtml}\n` : ''}${listHtml}\n    </section>`;
     })
     .join('\n\n');
 
@@ -135,128 +134,73 @@ function renderHtml(model) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Games directory" />
   <title>${title}</title>
+
+  <link rel="stylesheet" href="https://sayaka-4987.github.io/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://sayaka-4987.github.io/css/hux-blog.min.css" />
+  <link rel="stylesheet" href="https://sayaka-4987.github.io/css/syntax.css" />
+  <link rel="stylesheet" href="https://sayaka-4987.github.io/css/custom.css" />
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      color: #404040;
-      background: #ffffff;
-      line-height: 1.7;
-    }
-
-    .container,
-    .catalog-container {
-      width: min(960px, 92vw);
-      margin: 0 auto;
-    }
-
     .intro-header {
-      margin-bottom: 20px;
       background: no-repeat center center;
-      background-color: #808080;
       background-size: cover;
-      position: relative;
+      margin-bottom: 20px;
     }
 
     .intro-header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.4));
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.35));
     }
 
     .intro-header .site-heading {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      color: #ffffff;
       padding: 95px 0 70px;
     }
 
     .intro-header .site-heading h1 {
-      margin: 0;
-      font-size: 50px;
-      line-height: 1.1;
-      font-weight: 800;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+      font-weight: 700;
     }
 
     .intro-header .site-heading .subheading {
       display: block;
-      margin-top: 10px;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 1.1;
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.28);
     }
 
-    .catalog-container {
-      padding: 8px 0 64px;
+    .games-main {
+      padding-bottom: 60px;
     }
 
-    .catalog-card {
-      border: 1px solid #eee;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 8px 20px rgba(64, 64, 64, 0.06);
-      padding: 22px 24px;
-      margin-bottom: 22px;
-      transition: box-shadow 0.18s ease;
+    .games-section {
+      margin-bottom: 8px;
     }
 
-    .catalog-card:hover {
-      box-shadow: 0 12px 28px rgba(64, 64, 64, 0.1);
-    }
-
-    .section-title {
-      margin: 0 0 14px;
+    .games-section-title {
       font-size: 28px;
-      line-height: 1.3;
-      font-weight: 700;
+      margin: 32px 0 16px;
       color: #404040;
     }
 
-    p {
-      margin: 0 0 12px;
-      color: #666;
-      font-size: 16px;
+    .games-note {
+      margin: 0 0 14px;
+      color: #808080;
     }
 
-    .game-list {
-      margin: 0;
-      padding-left: 1.2rem;
+    .game-item .post-title {
+      font-size: 23px;
+      margin-top: 14px;
+      margin-bottom: 6px;
     }
 
-    .game-list li {
-      margin: 0;
-      padding: 0;
-      font-size: 18px;
-      line-height: 1.6;
-      color: #404040;
+    .game-item .post-subtitle {
+      font-size: 14px;
+      margin: 0 0 6px;
+      font-weight: 300;
+      opacity: 0.85;
     }
 
-    .game-list li + li {
-      margin-top: 0.55rem;
+    .game-divider {
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
-    .game-list a {
-      color: #404040;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .game-list a:hover,
-    .game-list a:focus {
-      color: #663399;
-      border-bottom-color: #663399;
-    }
-
-    .catalog-footer {
+    .games-footer {
       margin-top: 10px;
       color: #808080;
       font-size: 15px;
@@ -266,19 +210,12 @@ function renderHtml(model) {
     }
 
     @media only screen and (min-width: 768px) {
-      .intro-header .site-heading {
+      .intro-header .site-heading,
+      .intro-header .page-heading {
         padding: 150px 0;
       }
 
-      .intro-header .site-heading h1 {
-        font-size: 80px;
-      }
-
-      .catalog-card {
-        padding: 26px 30px;
-      }
-
-      .section-title {
+      .games-section-title {
         font-size: 30px;
       }
     }
@@ -288,49 +225,40 @@ function renderHtml(model) {
         margin-bottom: 12px;
       }
 
-      .intro-header .site-heading h1 {
-        font-size: 44px;
-      }
-
-      .intro-header .site-heading .subheading {
-        font-size: 17px;
-      }
-
-      .catalog-container {
-        padding-top: 6px;
-      }
-
-      .catalog-card {
-        margin-bottom: 16px;
-        padding: 18px 18px;
-      }
-
-      .section-title {
+      .games-section-title {
         font-size: 24px;
       }
 
-      .game-list li {
-        font-size: 17px;
+      .game-item .post-title {
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="intro-header" style="background-image: url('${heroImageUrl}')">
+  <header class="intro-header has-bg-image" style="background-image: url('${heroImageUrl}')">
     <div class="container">
-      <div class="site-heading">
-        <h1>${title}</h1>
-        ${tagline}
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="site-heading with-header-shadow">
+            <h1>${title}</h1>
+            ${tagline}
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="catalog-container">
+  <main class="container games-main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
 ${sectionsHtml}
 
-    <footer class="catalog-footer">
-      This page is generated from README.md.
-    </footer>
+        <footer class="games-footer">
+          This page is generated from README.md.
+        </footer>
+      </div>
+    </div>
   </main>
 </body>
 </html>
