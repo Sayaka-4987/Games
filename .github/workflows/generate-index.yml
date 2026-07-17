@@ -1,0 +1,45 @@
+name: Generate index.html from README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+      - scripts/build-index.js
+      - .github/workflows/generate-index.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate index.html
+        run: node scripts/build-index.js
+
+      - name: Commit generated index.html
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index.html changes detected"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: regenerate index.html from README [skip ci]"
+          git push

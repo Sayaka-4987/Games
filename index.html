@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Games directory" />
+  <title>Games</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: #404040;
+      background: #ffffff;
+      line-height: 1.7;
+    }
+
+    .container,
+    .catalog-container {
+      width: min(960px, 92vw);
+      margin: 0 auto;
+    }
+
+    .intro-header {
+      margin-bottom: 20px;
+      background: no-repeat center center;
+      background-color: #808080;
+      background-size: cover;
+      position: relative;
+    }
+
+    .intro-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.4));
+    }
+
+    .intro-header .site-heading {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #ffffff;
+      padding: 95px 0 70px;
+    }
+
+    .intro-header .site-heading h1 {
+      margin: 0;
+      font-size: 50px;
+      line-height: 1.1;
+      font-weight: 800;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+    }
+
+    .intro-header .site-heading .subheading {
+      display: block;
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.1;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.28);
+    }
+
+    .catalog-container {
+      padding: 8px 0 64px;
+    }
+
+    .catalog-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(64, 64, 64, 0.06);
+      padding: 22px 24px;
+      margin-bottom: 22px;
+      transition: box-shadow 0.18s ease;
+    }
+
+    .catalog-card:hover {
+      box-shadow: 0 12px 28px rgba(64, 64, 64, 0.1);
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #404040;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: #666;
+      font-size: 16px;
+    }
+
+    .game-list {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .game-list li {
+      margin: 0;
+      padding: 0;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #404040;
+    }
+
+    .game-list li + li {
+      margin-top: 0.55rem;
+    }
+
+    .game-list a {
+      color: #404040;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .game-list a:hover,
+    .game-list a:focus {
+      color: #663399;
+      border-bottom-color: #663399;
+    }
+
+    .catalog-footer {
+      margin-top: 10px;
+      color: #808080;
+      font-size: 15px;
+      font-family: 'Lora', 'Times New Roman', serif;
+      font-style: italic;
+      text-align: center;
+    }
+
+    @media only screen and (min-width: 768px) {
+      .intro-header .site-heading {
+        padding: 150px 0;
+      }
+
+      .intro-header .site-heading h1 {
+        font-size: 80px;
+      }
+
+      .catalog-card {
+        padding: 26px 30px;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .intro-header {
+        margin-bottom: 12px;
+      }
+
+      .intro-header .site-heading h1 {
+        font-size: 44px;
+      }
+
+      .intro-header .site-heading .subheading {
+        font-size: 17px;
+      }
+
+      .catalog-container {
+        padding-top: 6px;
+      }
+
+      .catalog-card {
+        margin-bottom: 16px;
+        padding: 18px 18px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .game-list li {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="intro-header" style="background-image: url('https://sayaka-4987.github.io/img/post-bg-desk.jpg')">
+    <div class="container">
+      <div class="site-heading">
+        <h1>Games</h1>
+        <span class="subheading">Games, prototypes, and the occasional questionable decision.</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="catalog-container">
+      <section class="catalog-card">
+        <h2 class="section-title">Tool</h2>
+        
+        <ul class="game-list">
+          <li><a href="https://github.com/Sayaka-4987/CoC7thdice" target="_blank" rel="noopener noreferrer">CoC 7th TRPG dice helper / CoC7th 规则用临时骰子</a></li>
+        </ul>
+      </section>
+
+      <section class="catalog-card">
+        <h2 class="section-title">One Page Webgame</h2>
+        
+        <ul class="game-list">
+          <li><a href="https://github.com/Sayaka-4987/Core-Identity-Detective" target="_blank" rel="noopener noreferrer">Core Identity Detective / 核心身份调查员</a></li>
+          <li><a href="https://github.com/Sayaka-4987/Rising-Star-Maker" target="_blank" rel="noopener noreferrer">Rising-Star-Maker / 职场新星梦工厂</a></li>
+        </ul>
+      </section>
+
+      <section class="catalog-card">
+        <h2 class="section-title">In Development</h2>
+        
+        <ul class="game-list">
+          <li>???</li>
+        </ul>
+      </section>
+
+    <footer class="catalog-footer">
+      This page is generated from README.md.
+    </footer>
+  </main>
+</body>
+</html>
