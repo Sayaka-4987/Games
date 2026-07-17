@@ -4,7 +4,7 @@ Games, prototypes, and the occasional questionable decision.
 
 ## Tool 
 
-- [CoC7th 规则用临时骰子](https://github.com/Sayaka-4987/CoC7thdice)
+- [CoC 7th TRPG dice helper / CoC7th 规则用临时骰子](https://github.com/Sayaka-4987/CoC7thdice)
 
 ## One Page Webgame
 
