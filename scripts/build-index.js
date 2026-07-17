@@ -143,6 +143,9 @@ function renderHtml(model) {
   <meta name="description" content="Games directory" />
   <title>${title}</title>
 
+  <link rel="shortcut icon" href="https://sayaka-4987.github.io/img/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://sayaka-4987.github.io/img/apple-touch-icon.png" />
+
   <link rel="stylesheet" href="https://sayaka-4987.github.io/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://sayaka-4987.github.io/css/hux-blog.min.css" />
   <link rel="stylesheet" href="https://sayaka-4987.github.io/css/syntax.css" />
