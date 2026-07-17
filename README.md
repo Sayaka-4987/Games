@@ -1,6 +1,6 @@
 # Games
 
-游戏目录, Games, Prototypes
+游戏目录 / Games, Prototypes
 
 ## Tool 
 
