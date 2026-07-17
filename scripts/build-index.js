@@ -17,7 +17,7 @@ function escapeHtml(value) {
 function parseMarkdown(readmeText) {
   const lines = readmeText.split(/\r?\n/);
 
-  let pageTitle = 'Games';
+  let pageTitle = 'Games - Blog by WYX';
   let tagline = '';
   const sections = [];
   let currentSection = null;
