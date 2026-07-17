@@ -1,6 +1,6 @@
 # Games
 
-Games, prototypes, and the occasional questionable decision.
+游戏目录, Games, Prototypes
 
 ## Tool 
 
