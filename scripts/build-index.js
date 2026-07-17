@@ -102,7 +102,8 @@ function parseMarkdown(readmeText) {
 }
 
 function renderHtml(model) {
-  const title = escapeHtml(model.pageTitle || 'Games - Blog by WYX');
+  const browserTitle = 'Games - Blog by WYX';
+  const title = escapeHtml(model.pageTitle || browserTitle);
   const tagline = model.tagline ? `<span class="subheading">${escapeHtml(model.tagline)}</span>` : '';
   const heroImageUrl = 'https://sayaka-4987.github.io/img/post-bg-desk.jpg';
   const blogHomeUrl = 'https://sayaka-4987.github.io/';
@@ -141,7 +142,7 @@ function renderHtml(model) {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Games directory" />
-  <title>${title}</title>
+  <title>${escapeHtml(browserTitle)}</title>
 
   <link rel="shortcut icon" href="https://sayaka-4987.github.io/img/favicon.ico" />
   <link rel="apple-touch-icon" href="https://sayaka-4987.github.io/img/apple-touch-icon.png" />
