@@ -285,8 +285,8 @@ function renderHtml(model) {
         <div class="navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="${blogHomeUrl}">Home</a></li>
-            <li><a href="${aboutUrl}">About</a></li>
             <li><a href="${tagsUrl}">Tags</a></li>
+            <li><a href="${aboutUrl}">About</a></li>
             <li><a href="${gamesHomeUrl}">Games</a></li>
           </ul>
         </div>
