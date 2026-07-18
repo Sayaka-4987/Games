@@ -105,7 +105,7 @@ function renderHtml(model) {
   const browserTitle = 'Games - Blog by WYX';
   const title = escapeHtml(model.pageTitle || browserTitle);
   const tagline = model.tagline ? `<span class="subheading">${escapeHtml(model.tagline)}</span>` : '';
-  const heroImageUrl = 'https://sayaka-4987.github.io/img/post-bg-desk.jpg';
+  const heroImageUrl = 'https://sayaka-4987.github.io/img/post-bg-gogh2.jpg';
   const blogHomeUrl = 'https://sayaka-4987.github.io/';
   const aboutUrl = 'https://sayaka-4987.github.io/about/';
   const tagsUrl = 'https://sayaka-4987.github.io/tags/';
